@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/json-enc.js"></script>
+
+</head>
+
+<style>
+    input[type="range"] {
+  width: 200px; /* Adjust the width as needed */
+}
+</style>
+
+<body>
+    <div id="plot" hx-trigger="load" hx-post="/plot" hx-ext='json-enc' hx-vals="js:{rune1: '3', rune2: '0'}"></div>
+    <form style="display:flex; flex-direction: column" hx-post="/plot" hx-trigger="change" hx-target="#plot" hx-ext='json-enc'>
+        <label for="slider">0/1 rune count: <span id="sliderValue">3</span></label>
+        <input type="range" id="slider" name="rune1" min="0" max="6" value="3" onchange="document.getElementById(`sliderValue`).textContent = this.value;">
+
+        <label for="slider2">1/2 rune count: <span id="slider2Value">0</span></label>
+        <input type="range" id="slider2" name="rune2" min="0" max="6" value="0" onchange='document.getElementById(`slider2Value`).textContent = this.value;'>
+
+        <div>
+            <label for="option1">marginal 0/1:</label>
+            <input type="checkbox" id="option1" name="option1" value="true">
+        </div>
+
+        <div>
+            <label for="option2">marginal 1/2:</label>
+            <input type="checkbox" id="option2" name="option2" value="true">
+        </div>
+        <div>
+            <label for="targetValue">target value:</label>
+            <input type="number" id="targetValue" name="targetValue" min="0" max="16" step="1" placeholder="0">
+        </div>
+    </form>
+
+
+</body>
+
+</html>
